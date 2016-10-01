@@ -21,6 +21,8 @@ import com.alexstyl.specialdates.upcoming.LoadingTimeDuration;
 import com.alexstyl.specialdates.util.ContactEventDateParser;
 import com.novoda.notils.exception.DeveloperError;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 public class PeopleEventsContentProvider extends ContentProvider {
 
     private static final int PEOPLE_EVENTS = 10;
@@ -32,6 +34,7 @@ public class PeopleEventsContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        JodaTimeAndroid.init(getContext());
         eventSQLHelper = new EventSQLiteOpenHelper(getContext());
         peopleEventsUpdater = PeopleEventsUpdater.newInstance(getContext());
         peopleEventsUpdater.register();

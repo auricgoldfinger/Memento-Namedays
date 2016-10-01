@@ -23,8 +23,9 @@ class DeviceContactFactory {
 
     public DeviceContact createContactWithId(long contactID) throws ContactNotFoundException {
         String selection = ContactsContract.Data.CONTACT_ID + " = " + contactID;
-        String birthdayRow = "(" + ContactsContract.Data.MIMETYPE + " = ? AND " + ContactsContract.CommonDataKinds.Event.TYPE + "=" +
-                ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY + ")";
+        String birthdayRow = "(" + ContactsContract.Data.MIMETYPE + " = ?"
+                // + " AND " + ContactsContract.CommonDataKinds.Event.TYPE + "=" + ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY
+                + ")";
         String nameRow = ContactsContract.Data.MIMETYPE + " = ?";
         String str = selection + " AND (" + birthdayRow + " OR " + nameRow + ")";
 

@@ -53,7 +53,7 @@ public class Notifier {
         return new Notifier(context, resources, imageLoader);
     }
 
-    public Notifier(Context context, Resources resources, ImageLoader imageLoader) {
+    private Notifier(Context context, Resources resources, ImageLoader imageLoader) {
         this.resources = resources;
         this.imageLoader = imageLoader;
         this.context = context.getApplicationContext();

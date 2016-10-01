@@ -35,10 +35,10 @@ class BirthdayDatabaseRefresher {
         return new BirthdayDatabaseRefresher(contactProvider, context.getContentResolver(), persister, marshaller);
     }
 
-    BirthdayDatabaseRefresher(ContactProvider contactProvider,
-                              ContentResolver contentResolver,
-                              PeopleEventsPersister persister,
-                              Marshaller<Birthday> marshaller) {
+    private BirthdayDatabaseRefresher(ContactProvider contactProvider,
+                                      ContentResolver contentResolver,
+                                      PeopleEventsPersister persister,
+                                      Marshaller<Birthday> marshaller) {
         this.contentResolver = contentResolver;
         this.persister = persister;
         this.marshaller = marshaller;
@@ -47,7 +47,7 @@ class BirthdayDatabaseRefresher {
 
     public void refreshBirthdays() {
         clearAllBirthdays();
-        List<Birthday> contacts = loadBirtdaysFromDisk();
+        List<Birthday> contacts = loadBirthdaysFromDisk();
         storeContactsToProvider(contacts);
     }
 
@@ -55,7 +55,7 @@ class BirthdayDatabaseRefresher {
         persister.deleteAllBirthdays();
     }
 
-    private List<Birthday> loadBirtdaysFromDisk() {
+    private List<Birthday> loadBirthdaysFromDisk() {
         Cursor cursor = BirthdayQuery.query(contentResolver);
         if (isInvalid(cursor)) {
             return NO_CONTACTS;
@@ -110,10 +110,12 @@ class BirthdayDatabaseRefresher {
         private static final String COL_DISPLAY_NAME = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY;
 
         public static final String WHERE =
-                "(" + ContactsContract.Data.MIMETYPE + " = ? AND " +
-                        ContactsContract.CommonDataKinds.Event.TYPE
-                        + "="
-                        + ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY + ")"
+                "(" + ContactsContract.Data.MIMETYPE + " = ?"
+                        //+ " AND " +
+                        //ContactsContract.CommonDataKinds.Event.TYPE
+                        //+ "="
+                        //+ ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY
+                        + ")"
                         + " AND " + ContactsContract.Data.IN_VISIBLE_GROUP + " = 1";
 
         public static final String[] WHERE_ARGS = {ContactsContract.CommonDataKinds.Event.CONTENT_ITEM_TYPE};

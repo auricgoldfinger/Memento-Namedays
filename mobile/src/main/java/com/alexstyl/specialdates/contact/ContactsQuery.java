@@ -25,6 +25,8 @@ class ContactsQuery {
             COL_LOOKUP, //2
             COL_DISPLAY_NAME,//3
             ContactsContract.CommonDataKinds.Event.START_DATE, //4
+            ContactsContract.CommonDataKinds.Event.LABEL, //5
+            ContactsContract.CommonDataKinds.Event.TYPE, // 6
     };
 
     public static final int ROW_TYPE = 0;
@@ -33,8 +35,11 @@ class ContactsQuery {
     public static final int LOOKUP_KEY = 2;
     public static final int DISPLAY_NAME = 3;
     public static final int BIRTHDAY = 4;
+    public static final int EVENT_LABEL = 5;
+    public static final int EVENT_TYPE = 6;
 
     public static boolean isBirthdayRow(Cursor cursor) {
-        return cursor.getString(ROW_TYPE).equals(ContactsContract.CommonDataKinds.Event.CONTENT_ITEM_TYPE);
+        return cursor.getString(ROW_TYPE).equals(ContactsContract.CommonDataKinds.Event.CONTENT_ITEM_TYPE)
+                && cursor.getInt(EVENT_TYPE) == ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY;
     }
 }
