@@ -45,7 +45,7 @@ class UpcomingEventsFetcher {
 
         @Override
         public void onLoadFinished(Loader<List<CelebrationDate>> loader, List<CelebrationDate> celebrationDates) {
-            if (loader.getId() == LOADER_ID_DATES) {
+            if (loader.getId() == LOADER_ID_DATES && celebrationDates != null) {
                 callback.onUpcomingDatesLoaded(celebrationDates);
             }
         }
