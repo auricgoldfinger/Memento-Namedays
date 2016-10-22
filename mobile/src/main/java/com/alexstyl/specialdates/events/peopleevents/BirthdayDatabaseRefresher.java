@@ -70,7 +70,7 @@ class BirthdayDatabaseRefresher {
                 Optional<Contact> optionalContact = getDeviceContactWithId(contactId);
                 if (optionalContact.isPresent()) {
                     Contact contact = optionalContact.get();
-                    if (contact.hasBirthday()) {
+                    if (contact.hasDateOfBirth()) {
                         events.add(new ContactEvent(BIRTHDAY, contact.getDateOfBirth(), contact));
                     }
                 }
